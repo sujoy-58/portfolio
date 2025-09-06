@@ -1,0 +1,22 @@
+src/
+├── app/
+│   ├── about/                     # About page
+│   │   └── page.js
+│   ├── contact/                   # Contact page
+│   │   └── page.js
+│   ├── work/                      # Work/Projects page
+│   │   └── page.js
+│   ├── components/                # Shared components
+│   │   ├── Navbar.js              # Animated Navbar
+│   │   ├── Preloader.js           # Preloader animation
+│   │   └── Footer.js              # Footer component
+│   ├── animations/                # Animation utilities
+│   │   ├── gsapConfig.js          # Centralized GSAP animation configs
+│   │   └── useGsap.js             # Custom GSAP hooks
+│   ├── layout.js                  # Root layout for all pages
+│   ├── globals.css                # Global CSS styles
+│   └── page.js                    # Main landing page
+├── public/                        # Static assets
+│   ├── images/                    # Store images here
+│   ├── fonts/                     # Store custom fonts here
+│   └── favicon.ico                # Website favicon

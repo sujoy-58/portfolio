@@ -1,21 +1,155 @@
+@import url("https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap");
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* @import url("https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap"); */
+/* html {
+  scrollbar-gutter: stable;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+body, #__next {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+} */
+
+.main-clr{
+   background-color: #DEDDD9;
+}
+
+.second-clr{
+  background-color: #0b0b0b;
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+#__next {
+  width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+   /* outline: 1px solid red; */
+}
+
+
+@font-face {
+    font-family: 'Primary'; 
+    src: url('/fonts/main.ttf') format('truetype');
+
   }
+  
+  @font-face {
+    font-family: 'Second';
+    src: url('/fonts/sec.ttf') format('truetype');
+  }
+
+  @layer utilities {
+    .font-third {
+      font-family: "Marcellus SC", serif;
+    }
+  }
+
+  /* body {
+    background-color: #DEDDD9;
+    overflow-x: hidden;
+  } */
+
+
+
+  ::view-transition-old(root),
+  ::view-transition-new(root){
+    animation: none !important;
+  }
+
+  ::view-transition-group(root){
+    z-index: auto !important;
+  }
+
+  ::view-transition-image-pair(root){
+    isolation: isolate;
+    will-change: transform, opacity, clip-path;
+    z-index: 1;
+  }
+
+  ::view-transition-new(root){
+    z-index: 1000;
+    animation: none !important;
+  }
+
+  ::view-transition-old(root){
+    z-index: 1;
+    animation: none !important;
+  }
+
+
+  ::selection {
+    background: #0b0b0b; /* Custom background color */
+    color: #f3f3f3df; /* Custom text color */
+  }
+
+  #about1 {
+    mask-image: url('/mask.svg');
+    background-color: #DEDDD9;
+    mask-repeat: no-repeat;
+    /* mask-position: 50%; */
+    mask-size: 0px;
+    color: #DEDDD9;
+    /* -webkit-mask-image: url('/mask.svg'); */
+    /* -webkit-mask-repeat: no-repeat; */
+  }
+
+/* Overlay-style scrollbar that doesn't shift layout */
+html {
+  scrollbar-width: thin;            /* For Firefox */
+  scrollbar-color: #000335 transparent;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 5px;
+  position: absolute;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #000335;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+
+.project-images{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5em;
+}
+.project-img{
+  width: 50%;
+  height: 75svh;
+
+}
+
+@media(max-width: 900px){
+  .project-nav .link{
+    display: none;
+
+  }
+  .project-img{
+    width: 90%;
+  }
 }
