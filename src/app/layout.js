@@ -23,14 +23,14 @@ export default function RootLayout({ children }) {
 
           
             {/* Noise GIF Background */}
-            {/* <div
+            <div
               className="fixed top-0 left-0 w-full h-full z-20 pointer-events-none overflow-hidden"
               style={{
                 background: `url('/videos/5w5m.gif') center center no-repeat`,
                 backgroundSize: "cover",
                 opacity: 0.01,
               }}
-            /> */}
+            />
 
             {/* Ripple Effect just above the noise */}
 
