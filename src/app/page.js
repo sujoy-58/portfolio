@@ -30,7 +30,7 @@ export default function Home() {
 
   return (
     <>
-    {/* <div className="bg-[#DEDDD9] w-full min-h-screen">
+    <div className="bg-[#DEDDD9] w-full min-h-screen">
       {loading ? (
         <Preloader onComplete={() => setLoading(false)} />
       ) : (
@@ -43,9 +43,9 @@ export default function Home() {
         </motion.div>
       )}
     </div>
-     */}
     
-    <Landing />
+    
+    {/* <Landing /> */}
     {/* <Footer/> */}
 
     </>
