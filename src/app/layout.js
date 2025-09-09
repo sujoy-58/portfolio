@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import SmoothScrolling from "./components/SmoothScrolling";
 import { ViewTransitions } from "next-view-transitions";
 import Footer from "./components/Footer";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 // import Footer from "./components/Footer";
 // import CanvasRippleEffect from "./components/CanvasRippleBackground";
 // import FloatingParticlesCanvas from "./components/FloatingParticlesCanvas";
@@ -36,7 +37,9 @@ export default function RootLayout({ children }) {
 
             {/* Foreground UI */}
             <Navbar />
-            <main>{children}</main>
+            <main>{children}
+              <SpeedInsights />
+            </main>
             
           </SmoothScrolling>
         </ViewTransitions>
