@@ -70,26 +70,39 @@ const MainNav = ({ setIsOpen }) => {
           "
         >
           <div className="socials-links flex flex-col gap-2 items-center md:items-start text-xl md:text-2xl">
-            <div className="flex justify-center items-center gap-1">
+            {/* <div className="flex justify-center items-center gap-1">
               <Fliplink href="#">EMAIL</Fliplink>
               <ArrowUpRight />
-            </div>
+            </div> */}
             <div className="flex justify-center items-center gap-1">
-              <Fliplink href="#">LINKEDIN</Fliplink>
+              <Fliplink href="https://www.linkedin.com/in/sujoymaji58/">
+                LINKEDIN
+              </Fliplink>
               <ArrowUpRight />
             </div>
             <div className="flex justify-center items-center gap-1">
-              <Fliplink href="#">GITHUB</Fliplink>
+              <Fliplink href="https://github.com/sujoy-58">GITHUB</Fliplink>
               <ArrowUpRight />
             </div>
             <div className="flex justify-center items-center gap-1">
-              <Fliplink href="#">INSTAGRAM</Fliplink>
+              <Fliplink href="https://www.instagram.com/su__xd_?igsh=Njl4a3BtcjhxeGF4">
+                INSTAGRAM
+              </Fliplink>
+              <ArrowUpRight />
+            </div>
+            <div className="flex justify-center items-center gap-1">
+              <Fliplink href="https://www.facebook.com/share/1Aoc8a2iqX/">
+                FACEBOOK
+              </Fliplink>
               <ArrowUpRight />
             </div>
           </div>
 
           <Magnet>
-            <button className="hire h-9 w-40 border border-[#DEDDD9] text-[#DEDDD9] rounded-full mt-6">
+            <button
+              className="hire h-9 w-40 border border-[#DEDDD9] text-[#DEDDD9] rounded-full mt-6"
+              onClick={() => (window.location = "mailto:sujoymaji16@gmail.com")}
+            >
               HIRE ME
             </button>
           </Magnet>

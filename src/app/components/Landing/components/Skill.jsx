@@ -5,10 +5,23 @@ import Matter from "matter-js";
 import Two from "two.js";
 
 const copy = [
-  "Next Js", "React Js", "Django", "JavaScript", "Node Js",
-  "Docker", "MongoDB", "Django", "Git", "Framer",
-  "Design", "Python", "WebSocket", "REST APIs", "Github",
-  "Kubernetes", "Java",
+  "Next Js",
+  "React Js",
+  "Django",
+  "JavaScript",
+  "Node Js",
+  "Docker",
+  "MongoDB",
+  "Django",
+  "Git",
+  "Framer",
+  "Design",
+  "Python",
+  "WebSocket",
+  "REST APIs",
+  "Github",
+  "Kubernetes",
+  "Java",
 ];
 
 export default function Skill() {
@@ -65,14 +78,29 @@ export default function Skill() {
       const createBoundary = (w, h) => {
         const rect = two.current.makeRectangle(0, 0, w, h);
         rect.visible = false;
-        rect.entity = Matter.Bodies.rectangle(0, 0, w, h, bounds.current.properties);
+        rect.entity = Matter.Bodies.rectangle(
+          0,
+          0,
+          w,
+          h,
+          bounds.current.properties
+        );
         rect.entity.position = rect.position;
         return rect;
       };
 
-      bounds.current.left = createBoundary(bounds.current.thickness, bounds.current.length);
-      bounds.current.right = createBoundary(bounds.current.thickness, bounds.current.length);
-      bounds.current.bottom = createBoundary(bounds.current.length, bounds.current.thickness);
+      bounds.current.left = createBoundary(
+        bounds.current.thickness,
+        bounds.current.length
+      );
+      bounds.current.right = createBoundary(
+        bounds.current.thickness,
+        bounds.current.length
+      );
+      bounds.current.bottom = createBoundary(
+        bounds.current.length,
+        bounds.current.thickness
+      );
 
       Matter.World.add(solver.current.world, [
         bounds.current.left.entity,
@@ -110,8 +138,8 @@ export default function Skill() {
         const group = new Two.Group();
         const circle = new Two.Circle(0, 0, fixedSize / 2);
 
-        circle.stroke = "#1e1e1e";
-        circle.linewidth = 1;
+        circle.stroke = "#1e1e1eD9";
+        circle.linewidth = 0.5;
         circle.noFill();
 
         const text = new Two.Text(word, 0, 0, defaultStyles);
@@ -120,7 +148,10 @@ export default function Skill() {
         const ox = x + fixedSize / 2;
         const oy = y + fixedSize / 2;
 
-        const entity = Matter.Bodies.circle(ox, oy, fixedSize / 2);
+        const entity = Matter.Bodies.circle(ox, oy, fixedSize / 2, {
+          restitution: 0.9, // high bounce
+          friction: 0.05, // less surface friction
+        });
         entity.object = group;
         group.translation.set(ox, oy);
         group.add(circle, text);

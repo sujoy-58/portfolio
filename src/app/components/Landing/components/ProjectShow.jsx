@@ -15,7 +15,12 @@ const HeroProjects = [
   { title: "Sunchase", slug: "sunchase", src: "1.jpg", color: "#000000" },
   { title: "Quick.Do", slug: "quick-do", src: "2.jpg", color: "#8C8C8C" },
   { title: "Tik Tak Toe", slug: "tic-tac-toe", src: "3.jpg", color: "#EFE8D3" },
-  { title: "Animation Web", slug: "animation-web", src: "4.jpg", color: "#706D63" },
+  {
+    title: "Animation Web",
+    slug: "animation-web",
+    src: "4.jpg",
+    color: "#706D63",
+  },
 ];
 
 export default function ProjectShow() {
@@ -93,6 +98,9 @@ export default function ProjectShow() {
           <h1
             id="work-text"
             className="text-[#1e1e1e] text-[4rem] sm:text-[6rem] md:text-[10rem] lg:text-[13rem] mb-2 md:mb-8 md:text-left text-center w-full"
+            style={{
+              clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            }}
           >
             WORKS
           </h1>
@@ -100,10 +108,10 @@ export default function ProjectShow() {
             id="work-side-text"
             className="text-[#1e1e1e] text-sm sm:text-base md:text-xl leading-snug sm:leading-normal md:leading-none font-second relative md:absolute md:bottom-10 md:right-10 w-full md:w-[60%] mt-4 md:mt-0 text-center md:text-right"
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-            facilisi. Sed cursus, risus ut tincidunt placerat, sapien elit
-            sagittis velit, fermentum sapien magna eget turpis. Suspendisse
-            potenti. Ut aliquet.
+            Every project is a playground where I blend ideas, design, and code
+            to build something unique. I love experimenting with visuals,
+            interactions, and storytelling, turning concepts into digital
+            experiences that feel fresh, engaging, and full of character.
           </p>
         </div>
       </div>

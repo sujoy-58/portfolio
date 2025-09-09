@@ -23,7 +23,8 @@ export default function Woork({ handle }) {
   const handleClick = () => {
     const project = projects.find((p) => p.slug === handle);
     if (project) {
-      window.location.replace(`/work/${project.slug}`);
+      // window.location.replace(`/work/${project.slug}`);
+      router.push(`/work/${project.slug}`);
     } else {
       console.error("Project not found for handle:", handle);
     }

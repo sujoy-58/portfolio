@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
@@ -11,6 +11,7 @@ const Footer = () => {
   const [hovering, setHovering] = useState(false);
   const [hoveredOnText, setHoveredOnText] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [cursorSize, setCursorSize] = useState(10);
 
   const container = useRef();
   const cursorRef = useRef();
@@ -24,16 +25,23 @@ const Footer = () => {
 
   const handleMouseMove = (e) => {
     const size = hoveredOnText ? 130 : 10;
+    setCursorSize(size);
+    
     x.set(e.clientX - size / 2);
     y.set(e.clientY - size / 2);
   };
 
   useEffect(() => {
-    // Disable custom cursor on touch devices
+    const updatePosition = (e) => {
+      x.set(e.clientX - cursorSize / 2);
+      y.set(e.clientY - cursorSize / 2);
+    };
+    
     if (window.matchMedia("(hover: none)").matches) return;
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+    
+    window.addEventListener("mousemove", updatePosition);
+    return () => window.removeEventListener("mousemove", updatePosition);
+  }, [cursorSize, x, y]);
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -72,45 +80,78 @@ const Footer = () => {
       className="main h-[80vh] w-screen flex flex-col justify-center items-center relative z-0 bg-[#deddd9] text-[#1e1e1e] px-4 sm:px-8"
     >
       {/* Side text */}
-      <p
-        
-        className="text-[#1e1e1e] font-second absolute p-4 sm:p-0 bottom-56 sm:top-36 sm:right-20 text-sm sm:text-base md:text-xl leading-tight sm:leading-normal md:leading-none max-w-full sm:max-w-[60%] text-center sm:text-right "
-      >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi.
-        Sed cursus, risus ut tincidunt placerat, sapien elit sagittis velit,
-        fermentum sapien magna eget turpis. Suspendisse potenti. Ut aliquet
+      <p className="text-[#1e1e1e] font-second absolute p-4 sm:p-0 bottom-56 sm:top-36 sm:right-20 text-sm sm:text-base md:text-xl leading-tight sm:leading-normal md:leading-none max-w-full sm:max-w-[60%] text-center sm:text-right ">
+        Let`s connect and build ideas that matter. I enjoy creating impactful
+        digital solutions with passion and precision, blending design with code
+        to craft meaningful experiences for people everywhere.
       </p>
 
-      {/* Custom Cursor (only for desktop/laptop) */}
-      {hovering && window.matchMedia("(hover: hover)").matches && (
-        <motion.div
-          ref={cursorRef}
-          className="cursor fixed top-0 left-0 rounded-full pointer-events-none flex justify-center items-center uppercase text-base tracking-wide font-medium"
-          style={{
-            x: springX,
-            y: springY,
-            mixBlendMode: "difference",
-            backgroundColor: "white",
-            color: "black",
-            zIndex: 50,
-          }}
-          animate={{
-            width: hoveredOnText ? "130px" : "10px",
-            height: hoveredOnText ? "130px" : "10px",
-          }}
-          transition={{ type: "tween", ease: "backOut" }}
-        >
-          {hoveredOnText && (copied ? "Copied!" : "Copy Email")}
-        </motion.div>
-      )}
+      {/* Custom Cursor with Bouncy Animations */}
+      <AnimatePresence>
+        {hovering && window.matchMedia("(hover: hover)").matches && (
+          <motion.div
+            ref={cursorRef}
+            className="cursor fixed top-0 left-0 rounded-full pointer-events-none flex justify-center items-center uppercase text-base tracking-wide font-medium"
+            style={{
+              x: springX,
+              y: springY,
+              mixBlendMode: "difference",
+              backgroundColor: "white",
+              color: "black",
+              zIndex: 50,
+            }}
+            initial={{ 
+              scale: 0,
+              opacity: 0,
+              width: cursorSize,
+              height: cursorSize
+            }}
+            animate={{ 
+              scale: 1,
+              opacity: 1,
+              width: cursorSize,
+              height: cursorSize,
+              transition: {
+                type: "spring",
+                damping: 10,
+                stiffness: 200,
+                mass: 0.5
+              }
+            }}
+            exit={{ 
+              scale: 0,
+              opacity: 0,
+              transition: {
+                type: "spring",
+                damping: 15,
+                stiffness: 300
+              }
+            }}
+            transition={{ 
+              type: "spring",
+              damping: 10,
+              stiffness: 150,
+              mass: 0.5
+            }}
+          >
+            {hoveredOnText && (copied ? "Copied!" : "Copy Email")}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Main Footer Text */}
       <div className="text h-full w-full flex justify-center items-end sm:items-end  mb-10 font-primary text-[#1e1e1e] relative whitespace-nowrap tracking-wider">
         <h1
           className="cursor-pointer text-[4rem] sm:text-[6rem] md:text-[10rem] lg:text-[13rem] leading-none"
           id="footer-txt"
-          onMouseEnter={() => setHoveredOnText(true)}
-          onMouseLeave={() => setHoveredOnText(false)}
+          onMouseEnter={() => {
+            setHoveredOnText(true);
+            setCursorSize(130);
+          }}
+          onMouseLeave={() => {
+            setHoveredOnText(false);
+            setCursorSize(10);
+          }}
           onClick={handleTextClick}
         >
           SUJOY<span className="space">&nbsp;&nbsp;</span>MAJI
@@ -168,10 +209,10 @@ const Footer = () => {
         <div className="nav-inr-location leading-4">
           <p className="opacity-85">Other links:</p>
           <div className="flex flex-wrap gap-1">
-            <a href="#">Li,</a>
-            <a href="#">Github,</a>
-            <a href="#">Fb,</a>
-            <a href="#">In</a>
+            <a href="https://www.linkedin.com/in/sujoymaji58/">Li,</a>
+            <a href="https://github.com/sujoy-58">Github,</a>
+            <a href="https://www.facebook.com/share/1Aoc8a2iqX/">Fb,</a>
+            <a href="https://www.instagram.com/su__xd_?igsh=Njl4a3BtcjhxeGF4">In</a>
           </div>
         </div>
       </div>

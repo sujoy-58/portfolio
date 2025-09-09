@@ -229,7 +229,6 @@ const Landing = () => {
             <h1
               style={{
                 clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-                fontFamily: "var(--font-primary)",
               }}
               id="hero-text"
             >
@@ -249,7 +248,7 @@ const Landing = () => {
               night. Occasionally, I do both at once (don`t ask how). If you`re
               curious or dangerously bored, grab my{" "}
               <a
-                href="/resume.pdf"
+                href="/assets/SujoyResume.pdf"
                 download
                 className="cursor-pointer hover:opacity-80 transition-opacity duration-300 underline"
               >
