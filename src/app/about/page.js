@@ -92,8 +92,7 @@ const Aboutpage = () => {
 
         <div
         style={{ overflowWrap: "anywhere" }}
-        className="text-[#1e1e1e] text-sm sm:text-base md:text-2xl w-full max-w-full sm:w-full sm:max-w-full md:w-1/2 md:max-w-[50%] font-second absolute bottom-16 md:right-8 m-0 p-1 md:p-0 leading-tight sm:leading-normal md:leading-none text-center sm:text-center md:text-right
-        ">
+        className="text-[#1e1e1e] text-sm sm:text-base md:text-2xl w-full max-w-full sm:w-full sm:max-w-full md:w-[65%] md:max-w-[65%] font-second absolute bottom-16 md:right-8 m-0 p-1 md:p-0 leading-tight sm:leading-normal md:leading-none text-center sm:text-center md:text-right">
           <p id="about-side-text">
             A developer from India who codes, debugs, and sometimes even
             Googles the obvious. I game like it`s a job, travel like I`m

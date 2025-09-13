@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useTransitionRouter } from "next-view-transitions"; // ✅ instead of next/navigation
 import Lenis from "@studio-freight/lenis";
 import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
@@ -15,20 +15,15 @@ const HeroProjects = [
   { title: "Sunchase", slug: "sunchase", src: "1.jpg", color: "#000000" },
   { title: "Quick.Do", slug: "quick-do", src: "2.jpg", color: "#8C8C8C" },
   { title: "Tik Tak Toe", slug: "tic-tac-toe", src: "3.jpg", color: "#EFE8D3" },
-  {
-    title: "Animation Web",
-    slug: "animation-web",
-    src: "4.jpg",
-    color: "#706D63",
-  },
+  { title: "Animation Web", slug: "animation-web", src: "4.jpg", color: "#706D63" },
 ];
 
 export default function ProjectShow() {
   const workContainer = useRef(null);
   const [modal, setModal] = useState({ active: false, index: 0 });
-  const router = useRouter();
+  const router = useTransitionRouter(); // ✅ use this instead of useRouter
 
-  // smooth scroll
+  // Smooth scroll
   useEffect(() => {
     const lenis = new Lenis();
     const raf = (time) => {
@@ -85,8 +80,37 @@ export default function ProjectShow() {
     });
   }, []);
 
+  // ✅ Same transition logic from Fliplink
+  function slideInOut() {
+    document.documentElement.animate(
+      [
+        { opacity: 1, transform: "translateY(0)" },
+        { opacity: 0.2, transform: "translateY(-35%)" },
+      ],
+      {
+        duration: 1500,
+        easing: "cubic-bezier(0.87, 0, 0.13, 1)",
+        fill: "forwards",
+        pseudoElement: "::view-transition-old(root)",
+      }
+    );
+
+    document.documentElement.animate(
+      [
+        { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)" },
+        { clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)" },
+      ],
+      {
+        duration: 1500,
+        easing: "cubic-bezier(0.87, 0, 0.13, 1)",
+        fill: "forwards",
+        pseudoElement: "::view-transition-new(root)",
+      }
+    );
+  }
+
   const handleClick = (slug) => {
-    window.location.replace(`/work/${slug}`);
+    router.push(`/work/${slug}`, { onTransitionReady: slideInOut }); // ✅ triggers transition
   };
 
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
@@ -98,9 +122,7 @@ export default function ProjectShow() {
           <h1
             id="work-text"
             className="text-[#1e1e1e] text-[4rem] sm:text-[6rem] md:text-[10rem] lg:text-[13rem] mb-2 md:mb-8 md:text-left text-center w-full"
-            style={{
-              clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-            }}
+            style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
           >
             WORKS
           </h1>
@@ -125,7 +147,7 @@ export default function ProjectShow() {
               index={index}
               title={project.title}
               setModal={setModal}
-              onClick={() => handleClick(project.slug)}
+              onClick={() => handleClick(project.slug)} // ✅ now uses transition
             />
           ))}
         </div>

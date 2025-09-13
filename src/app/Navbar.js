@@ -75,7 +75,7 @@ const Navbar = () => {
       <motion.nav
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.5, ease: "easeOut", delay: 2.5 }}
+        transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
         className="w-full fixed top-0 left-0 text-black bg-transparent font-second font-semibold text-sm z-30 py-3"
       >
         {/* Mobile layout - only Who Am I and Burger */}

@@ -86,17 +86,32 @@ const ContactForm = () => {
 
     if (!formData.name) newErrors.push("name");
     else filled++;
+
     if (!formData.company) newErrors.push("company");
     else filled++;
-    if (!formData.email) newErrors.push("email");
-    else filled++;
-    if (!formData.description || formData.description.length < 20)
+
+    if (!formData.email) {
+      newErrors.push("email");
+    } else {
+      // email format validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        newErrors.push("invalidEmail");
+      } else {
+        filled++;
+      }
+    }
+
+    if (!formData.description || formData.description.length < 20) {
       newErrors.push("description");
-    else filled++;
+    } else filled++;
+
     if (formData.services.length === 0) newErrors.push("services");
     else filled++;
+
     if (!formData.timeline) newErrors.push("timeline");
     else filled++;
+
     if (!formData.deadline) newErrors.push("deadline");
     else filled++;
 
@@ -110,25 +125,37 @@ const ContactForm = () => {
     validateForm();
   }, [formData]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      console.log("Form submitted:", formData);
-      alert("Form submitted successfully!");
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (validateForm()) {
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-      setFormData(initialFormState);
-      setErrors([]);
-      setTouched([]);
-      setMissingFields(7);
-    } else {
-      console.log("Form has errors:", errors);
+      if (res.ok) {
+        alert("Form submitted successfully! We’ll get back to you soon.");
+        setFormData(initialFormState);
+        setErrors([]);
+        setTouched([]);
+        setMissingFields(7);
+      } else {
+        alert("Something went wrong. Please try again later.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error submitting form.");
     }
-  };
+  }
+};
+
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-6xl grid md:grid-cols-2 gap-24"
+      className="w-full max-w-6xl grid md:grid-cols-2 gap-24 font-second"
     >
       <div className="space-y-6">
         <InputField
@@ -150,7 +177,13 @@ const ContactForm = () => {
           value={formData.email}
           onChange={(val) => handleInputChange("email", val)}
           required
-          error={errors.includes("email") && touched.includes("email")}
+          error={
+            (errors.includes("email") || errors.includes("invalidEmail")) &&
+            touched.includes("email")
+          }
+          errorMessage={
+            errors.includes("invalidEmail") ? "Write valid email" : null
+          }
         />
         <InputField
           label="PROJECT DESCRIPTION (MIN. 20 CHAR)"

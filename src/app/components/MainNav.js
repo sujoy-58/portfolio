@@ -69,7 +69,7 @@ const MainNav = ({ setIsOpen }) => {
             text-center md:text-left
           "
         >
-          <div className="socials-links flex flex-col gap-2 items-center md:items-start text-xl md:text-2xl">
+          <div className="socials-links font-second  flex flex-col gap-2 items-center md:items-start text-xl md:text-2xl">
             {/* <div className="flex justify-center items-center gap-1">
               <Fliplink href="#">EMAIL</Fliplink>
               <ArrowUpRight />
@@ -100,7 +100,7 @@ const MainNav = ({ setIsOpen }) => {
 
           <Magnet>
             <button
-              className="hire h-9 w-40 border border-[#DEDDD9] text-[#DEDDD9] rounded-full mt-6"
+              className="hire h-9 w-40 border border-[#DEDDD9] text-[#DEDDD9] font-second rounded-full mt-6"
               onClick={() => (window.location = "mailto:sujoymaji16@gmail.com")}
             >
               HIRE ME

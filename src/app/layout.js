@@ -4,11 +4,21 @@ import Navbar from "./Navbar";
 import SmoothScrolling from "./components/SmoothScrolling";
 import { ViewTransitions } from "next-view-transitions";
 import Footer from "./components/Footer";
-import { SpeedInsights } from "@vercel/speed-insights/next"
-// import Footer from "./components/Footer";
-// import CanvasRippleEffect from "./components/CanvasRippleBackground";
-// import FloatingParticlesCanvas from "./components/FloatingParticlesCanvas";
-// import CanvasRippleEffect from "./components/CanvasRippleEffect";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+// import localFont from "next/font/local";
+
+// const myFont = localFont({
+//   src: "/fonts/sec.woff2",
+//   weight: "400",
+//   display: "swap",
+// });
+import { DM_Sans } from "next/font/google";
+
+const inter = DM_Sans({
+  subsets: ["latin"],
+  display: "swap", // ensures no flicker
+  weight: ["400", "600", "700"],
+});
 
 export const metadata = {
   title: "Sfolio",
@@ -17,12 +27,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.className}>
       <body className="main-clr overflow-x-hidden relative">
         <ViewTransitions>
           <SmoothScrolling>
-
-          
             {/* Noise GIF Background */}
             <div
               className="fixed top-0 left-0 w-full h-full z-20 pointer-events-none overflow-hidden"
@@ -37,10 +45,10 @@ export default function RootLayout({ children }) {
 
             {/* Foreground UI */}
             <Navbar />
-            <main>{children}
+            <main>
+              {children}
               <SpeedInsights />
             </main>
-            
           </SmoothScrolling>
         </ViewTransitions>
       </body>

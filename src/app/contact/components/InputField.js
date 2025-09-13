@@ -18,7 +18,7 @@ const InputField = ({
         <textarea
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`w-full bg-transparent border-b ${error ? 'border-red-500' : 'border-[#1e1e1e]'} focus:border-gray-500 outline-none py-2 transition-colors` }
+          className={`w-full bg-transparent border-b ${error ? 'border-red-500' : 'border-[#1e1e1e]'} font-second focus:border-gray-500 outline-none py-2 transition-colors` }
           rows={4}
         />
       ) : (
@@ -26,7 +26,7 @@ const InputField = ({
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`w-full bg-transparent border-b ${error ? 'border-red-500' : 'border-[#1e1e1e]'} focus:border-gray-500 outline-none py-2 transition-colors`}
+          className={`w-full bg-transparent border-b ${error ? 'border-red-500' : 'border-[#1e1e1e]'} font-second focus:border-gray-500 outline-none py-2 transition-colors`}
         />
       )}
     </div>

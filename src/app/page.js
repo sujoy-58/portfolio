@@ -1,38 +1,35 @@
 "use client";
-import Link from "next/link";
-import Image from "next/image";
-import Magnet from "./common/Magnet";
-import Fliplink from "./common/Fliplink";
-import Footer from "./components/Footer";
-import { useEffect, useState, useRef } from "react";
-import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import Preloader from "./components/Preloader";
 import Landing from "./components/Landing/Main";
-import Navbar from "./Navbar";
-import MainNav from "./components/MainNav";
-import Skill from "./components/Landing/components/Skill";
-import Slider from "./components/Landing/components/Slider";
-// import ImageSlider from "./components/Landing/components/ImageSlider";
 
 export default function Home() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if the navigation type is a reload
     const navigationEntries = performance.getEntriesByType("navigation");
-    const isReload = navigationEntries.length > 0 && navigationEntries[0].type === "reload";
+    const isReload =
+      navigationEntries.length > 0 &&
+      navigationEntries[0].type === "reload";
 
     if (isReload) {
+      // Show preloader on reload
       setLoading(true);
+      const timer = setTimeout(() => setLoading(false), 2500); // adjust to your animation length
+      return () => clearTimeout(timer);
+    } else {
+      // First-time load → also show preloader
+      setLoading(true);
+      const timer = setTimeout(() => setLoading(false), 2000);
+      return () => clearTimeout(timer);
     }
   }, []);
 
   return (
-    <>
     <div className="bg-[#DEDDD9] w-full min-h-screen">
       {loading ? (
-        <Preloader onComplete={() => setLoading(false)} />
+        <Preloader />
       ) : (
         <motion.div
           initial={{ opacity: 0, x: -150 }}
@@ -43,11 +40,5 @@ export default function Home() {
         </motion.div>
       )}
     </div>
-    
-    
-    {/* <Landing /> */}
-    {/* <Footer/> */}
-
-    </>
   );
 }

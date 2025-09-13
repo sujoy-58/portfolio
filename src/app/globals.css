@@ -50,7 +50,7 @@ html, body {
   
   @font-face {
     font-family: 'Second';
-    src: url('/fonts/sec.ttf') format('truetype');
+    src: url('/fonts/sec.woff2') format('truetype');
   }
 
   @layer utilities {
