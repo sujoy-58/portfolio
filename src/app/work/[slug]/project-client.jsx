@@ -219,7 +219,7 @@ export default function ProjectClient({ project, nextProject, prevProject }) {
             <Magnet>
               <div
                 ref={prevBtnRef}
-                className="font-second font-semibold text-xs sm:text-sm flex items-center gap-1 cursor-pointer"
+                className="font-second font-semibold text-xs sm:text-sm hidden sm:flex items-center gap-1 cursor-pointer"
                 onClick={() => handleNavigation(prevProject.slug)}
               >
                 <ArrowLeft size={14} /> Prev
@@ -234,8 +234,8 @@ export default function ProjectClient({ project, nextProject, prevProject }) {
           <div className="absolute right-4 sm:right-10 top-1/2 -translate-y-1/2">
             <Magnet>
               <div
-                ref={prevBtnRef}
-                className="font-second font-semibold text-xs sm:text-sm flex items-center gap-1 cursor-pointer"
+                ref={nextBtnRef}
+                className="font-second font-semibold text-xs sm:text-sm hidden sm:flex items-center gap-1 cursor-pointer"
                 onClick={() => handleNavigation(nextProject.slug)}
               >Next
                 <ArrowRight size={14} /> 
